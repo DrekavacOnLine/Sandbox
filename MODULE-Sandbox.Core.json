@@ -1,0 +1,14 @@
+[
+    {
+		"testsScope": "Core",
+        "envName": "Sandbox",
+		"email": "\"apostolni@sbb.rs\"",
+        "password": "\"T0p1ica\"",
+		"profile_id": 99,
+		"user_id": 234,
+		"username": "\"Dejan Apostolovic\"",
+		"location": "\"Novi Sad\"",
+		"github": "\"DrekavacOnLine\"",
+		"status": "\"Senior\""
+	}
+]

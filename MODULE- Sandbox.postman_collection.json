@@ -1,0 +1,2676 @@
+{
+	"info": {
+		"_postman_id": "c2e3ba4c-38fd-4b75-a341-cb30d05edc89",
+		"name": "MODULE: Sandbox",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Tests",
+			"item": [
+				{
+					"name": "#INIT",
+					"item": [
+						{
+							"name": "_Test session init",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+										"exec": [
+											"//reset global variables for controling execution flow",
+											"eval(globals.cleanup)();",
+											"",
+											"var email = data.email;",
+											"if (email){ ",
+											"    pm.environment.set(\"email\",data.email);",
+											"    console.log(\"dataFile/email: \" + email);",
+											"}",
+											"",
+											"var password = data.password;",
+											"if (password){ ",
+											"    pm.environment.set(\"password\",data.password);",
+											"    console.log(\"dataFile/password: \" + password);",
+											"}",
+											"",
+											"var profile_id = data.profile_id;",
+											"if (profile_id){ ",
+											"    pm.environment.set(\"profile_id\",data.profile_id);",
+											"    console.log(\"dataFile/profile_id: \" + profile_id);",
+											"}",
+											"",
+											"var user_id = data.user_id;",
+											"if (user_id){ ",
+											"    pm.environment.set(\"user_id\",data.user_id);",
+											"    console.log(\"dataFile/user_id: \" + user_id);",
+											"}",
+											"",
+											"var username = data.username;",
+											"if (username){ ",
+											"    pm.environment.set(\"username\",data.username);",
+											"    console.log(\"dataFile/username: \" + username);",
+											"}",
+											"",
+											"var location = data.location;",
+											"if (location){ ",
+											"    pm.environment.set(\"location\",data.location);",
+											"    console.log(\"dataFile/location: \" + location);",
+											"}",
+											"",
+											"var github = data.github;",
+											"if (github){ ",
+											"    pm.environment.set(\"github\",data.github);",
+											"    console.log(\"dataFile/github: \" + github);",
+											"}",
+											"",
+											"var status = data.status;",
+											"if (status){ ",
+											"    pm.environment.set(\"status\",data.status);",
+											"    console.log(\"dataFile/status: \" + status);",
+											"}",
+											"",
+											"//specify list of tests to be executed in exact order",
+											"let testsScope = data.testsScope;",
+											"",
+											"switch(testsScope) {",
+											"    case \"Full\":",
+											"        var testSession = [",
+											"            ]; break;",
+											"    case \"Core\":",
+											"        var testSession = [",
+											"            \"Generate access token\",",
+											"            \"User profile can be updated\",",
+											"            \"User profile can be retrieved\",",
+											"            \"User profile update fails if empty body is used\",",
+											"            \"User profile update fails if user name is too short\",",
+											"            \"Technology can be created, retrieved, updated and deleted\",",
+											"            \"Seniority can be created, retrieved, updated and deleted\",",
+											"            \"Role can be created, retrieved, updated and deleted\",",
+											"            \"Person can be created having all available technologies\",",
+											"            \"Project can be created having all available persons\"",
+											"            ]; break;",
+											"    case \"Quick\":",
+											"        var testSession = [",
+											"            ",
+											"            ]; break;",
+											"    case \"TestRailClean\":        ",
+											"        var testSession = [",
+											"            \"_Test session close\"",
+											"            ]; break;",
+											"    default:",
+											"        throw new Error(\"No tests selected for execution!\")",
+											"}        ",
+											"    ",
+											"// Session initiate from PrS using eval()",
+											"eval(globals.sessionInit)(testSession, \"testSession\");",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "OPTIONS",
+								"header": [],
+								"url": {
+									"raw": "httpbin.org/uuid",
+									"host": [
+										"httpbin",
+										"org"
+									],
+									"path": [
+										"uuid"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Generate access token",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ae9a03b6-e62e-48de-b80c-7144951c24e0",
+										"exec": [
+											"var requestsToRun = [",
+											"        \"getAuthToken\"",
+											"    ]; ",
+											"",
+											"// Session initiate from PrS using eval()",
+											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "da97c8d7-19cf-460d-b66c-1dd884a89f7a",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "OPTIONS",
+								"header": [],
+								"url": {
+									"raw": "httpbin.org/uuid",
+									"host": [
+										"httpbin",
+										"org"
+									],
+									"path": [
+										"uuid"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Profile",
+					"item": [
+						{
+							"name": "User profile can be updated",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+										"exec": [
+											"var requestsToRun = [",
+											"        \"postProfile\"",
+											"    ]; ",
+											"",
+											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "HEAD",
+								"header": [],
+								"url": {
+									"raw": "httpbin.org/uuid",
+									"host": [
+										"httpbin",
+										"org"
+									],
+									"path": [
+										"uuid"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User profile can be retrieved",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+										"exec": [
+											"var requestsToRun = [",
+											"        \"getProfile\"",
+											"    ]; ",
+											"",
+											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "HEAD",
+								"header": [],
+								"url": {
+									"raw": "httpbin.org/uuid",
+									"host": [
+										"httpbin",
+										"org"
+									],
+									"path": [
+										"uuid"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User profile update fails if empty body is used",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+										"exec": [
+											"var requestsToRun = [",
+											"        \"postProfileEmptyBody\"",
+											"    ]; ",
+											"",
+											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "HEAD",
+								"header": [],
+								"url": {
+									"raw": "httpbin.org/uuid",
+									"host": [
+										"httpbin",
+										"org"
+									],
+									"path": [
+										"uuid"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User profile update fails if user name is too short",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+										"exec": [
+											"var requestsToRun = [",
+											"        \"postProfileUserNameTooShortBody\"",
+											"    ]; ",
+											"",
+											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "HEAD",
+								"header": [],
+								"url": {
+									"raw": "httpbin.org/uuid",
+									"host": [
+										"httpbin",
+										"org"
+									],
+									"path": [
+										"uuid"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Playground",
+					"item": [
+						{
+							"name": "Technology can be created, retrieved, updated and deleted",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+										"exec": [
+											"var requestsToRun = [",
+											"        \"postTechnology\",",
+											"        \"getTechnology\",",
+											"        \"putTechnology\",",
+											"        \"deleteTechnology\"",
+											"    ]; ",
+											"",
+											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "HEAD",
+								"header": [],
+								"url": {
+									"raw": "httpbin.org/uuid",
+									"host": [
+										"httpbin",
+										"org"
+									],
+									"path": [
+										"uuid"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Seniority can be created, retrieved, updated and deleted",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+										"exec": [
+											"var requestsToRun = [",
+											"        \"postSeniority\",",
+											"        \"getSeniority\",",
+											"        \"putSeniority\",",
+											"        \"deleteSeniority\"",
+											"    ]; ",
+											"",
+											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "HEAD",
+								"header": [],
+								"url": {
+									"raw": "httpbin.org/uuid",
+									"host": [
+										"httpbin",
+										"org"
+									],
+									"path": [
+										"uuid"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Role can be created, retrieved, updated and deleted",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+										"exec": [
+											"var requestsToRun = [",
+											"        \"postRole\",",
+											"        \"getRole\",",
+											"        \"putRole\",",
+											"        \"deleteRole\"",
+											"    ]; ",
+											"",
+											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "HEAD",
+								"header": [],
+								"url": {
+									"raw": "httpbin.org/uuid",
+									"host": [
+										"httpbin",
+										"org"
+									],
+									"path": [
+										"uuid"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Person can be created having all available technologies",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+										"exec": [
+											"var requestsToRun = [",
+											"        \"postSeniority\",",
+											"        \"postRole\",",
+											"        \"getTechnologies\",",
+											"        \"postPerson\"",
+											"    ]; ",
+											"",
+											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "HEAD",
+								"header": [],
+								"url": {
+									"raw": "httpbin.org/uuid",
+									"host": [
+										"httpbin",
+										"org"
+									],
+									"path": [
+										"uuid"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Project can be created having all available persons",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+										"exec": [
+											"var requestsToRun = [",
+											"        \"getPeople\",",
+											"        \"postProject\"",
+											"    ]; ",
+											"",
+											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "HEAD",
+								"header": [],
+								"url": {
+									"raw": "httpbin.org/uuid",
+									"host": [
+										"httpbin",
+										"org"
+									],
+									"path": [
+										"uuid"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Requests",
+			"item": [
+				{
+					"name": "Profile",
+					"item": [
+						{
+							"name": "getProfile",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+										"exec": [
+											"// Execute standard tests from PrS using eval()\r",
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"//profile id is correct\r",
+											"pm.test(\"Profile id is correct\", () => {\r",
+											"    let requestProfileId = pm.environment.get(\"profile_id\");\r",
+											"    let responseProfileId = JSON.parse(responseBody).profile.profile_id;\r",
+											"    pm.expect(responseProfileId).to.eql(requestProfileId);\r",
+											"});\r",
+											"\r",
+											"//user id is correct\r",
+											"pm.test(\"User id is correct\", () => {\r",
+											"    let requestUserId = pm.environment.get(\"user_id\");\r",
+											"    let responseUserId = JSON.parse(responseBody).profile.user_id;\r",
+											"    pm.expect(responseUserId).to.eql(requestUserId);\r",
+											"});\r",
+											"\r",
+											"//user name is correct\r",
+											"pm.test(\"Usert name is correct\", () => {\r",
+											"    let requestUserName = pm.environment.get(\"username\");\r",
+											"    let responseUserName = JSON.stringify(JSON.parse(responseBody).profile.username);\r",
+											"    pm.expect(responseUserName).to.eql(requestUserName);\r",
+											"});\r",
+											"\r",
+											"//location is correct\r",
+											"pm.test(\"Location is correct\", () => {\r",
+											"    let requestLocation = pm.environment.get(\"location\");\r",
+											"    let responseLocation = JSON.stringify(JSON.parse(responseBody).profile.location);\r",
+											"    pm.expect(responseLocation).to.eql(requestLocation);\r",
+											"});\r",
+											"\r",
+											"//github is correct\r",
+											"pm.test(\"Github is correct\", () => {\r",
+											"    let requestGithub = pm.environment.get(\"github\");\r",
+											"    let responseGithub = JSON.stringify(JSON.parse(responseBody).profile.github);\r",
+											"    pm.expect(responseGithub).to.eql(requestGithub);\r",
+											"});\r",
+											"\r",
+											"//status is correct\r",
+											"pm.test(\"Status is correct\", () => {\r",
+											"    let requestStatus = pm.environment.get(\"status\");\r",
+											"    let responseStatus = JSON.stringify(JSON.parse(responseBody).profile.status);\r",
+											"    pm.expect(responseStatus).to.eql(requestStatus);\r",
+											"});\r",
+											"\r",
+											"// Session navigate from PrS using eval()\r",
+											"eval(globals.sessionNavigate)();"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json, application/hal+json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/profile",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "postProfile",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+										"exec": [
+											"// Execute standard tests from PrS using eval()\r",
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"//user name is updated\r",
+											"pm.test(\"Usert name is updated\", () => {\r",
+											"    let requestUserName = JSON.parse(request.data).username;\r",
+											"    let responseUserName = JSON.parse(responseBody).username;\r",
+											"    pm.expect(responseUserName).to.eql(requestUserName);\r",
+											"    pm.environment.set(\"username\",JSON.stringify((requestUserName)));\r",
+											"});\r",
+											"\r",
+											"//location is updated\r",
+											"pm.test(\"Location is updated\", () => {\r",
+											"    let requestLocation = JSON.parse(request.data).location;\r",
+											"    let responseLocation = JSON.parse(responseBody).location;\r",
+											"    pm.expect(responseLocation).to.eql(requestLocation);\r",
+											"    pm.environment.set(\"location\",JSON.stringify((requestLocation)));\r",
+											"});\r",
+											"\r",
+											"//github is updated\r",
+											"pm.test(\"Github is updated\", () => {\r",
+											"    let requestGithub = JSON.parse(request.data).github;\r",
+											"    let responseGithub = JSON.parse(responseBody).github;\r",
+											"    pm.expect(responseGithub).to.eql(requestGithub);\r",
+											"    pm.environment.set(\"github\",JSON.stringify((requestGithub)));\r",
+											"});\r",
+											"\r",
+											"//status is updated\r",
+											"pm.test(\"Status is updated\", () => {\r",
+											"    let requestStatus = JSON.parse(request.data).status;\r",
+											"    let responseStatus = JSON.parse(responseBody).status;\r",
+											"    pm.expect(responseStatus).to.eql(requestStatus);\r",
+											"    pm.environment.set(\"status\",JSON.stringify((requestStatus)));\r",
+											"});\r",
+											"\r",
+											"// Session navigate from PrS using eval()\r",
+											"eval(globals.sessionNavigate)();"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json, application/hal+json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\":\"Apostolovic Dejan\",\n\t\"location\":\"Gunduliceva 8/11 Novi Sad\",\n\t\"status\":\"Senior\",\n\t\"github\":\"DrekavacOnLine\",\n\t\"bio\":\"Born 6th of September 1970, married (three kids). Finished University of Nis, Faculty of Electronics Engineering, on February 1997. Working on various QA postitions starting August 2007.\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/profile",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "postProfileEmptyBody",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+										"exec": [
+											"\r",
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"//user name is required\r",
+											"pm.test(\"Usert name is required\", () => {\r",
+											"    let responseUserName = JSON.parse(responseBody).username;\r",
+											"    pm.expect(responseUserName).to.eql(\"Username is required\");\r",
+											"});\r",
+											"\r",
+											"//github is required\r",
+											"pm.test(\"Github is required\", () => {\r",
+											"    let responseGithub = JSON.parse(responseBody).github;\r",
+											"    pm.expect(responseGithub).to.eql(\"Github username is required\");\r",
+											"});\r",
+											"\r",
+											"//status is required\r",
+											"pm.test(\"Status is required\", () => {\r",
+											"    let responseStatus = JSON.parse(responseBody).status;\r",
+											"    pm.expect(responseStatus).to.eql(\"Profesional Status is required\");\r",
+											"});\r",
+											"\r",
+											"// Session navigate from PrS using eval()\r",
+											"eval(globals.sessionNavigate)();"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json, application/hal+json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{url}}/profile",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "postProfileUserNameTooShortBody",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+										"exec": [
+											"\r",
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"//Username needs to be between 4 and 30\r",
+											"pm.test(\"User name needs to be between 4 and 30\", () => {\r",
+											"    let responseUserName = JSON.parse(responseBody).username;\r",
+											"    pm.expect(responseUserName).to.eql(\"Username needs to be between 4 and 30\");\r",
+											"});\r",
+											"\r",
+											"\r",
+											"// Session navigate from PrS using eval()\r",
+											"eval(globals.sessionNavigate)();"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json, application/hal+json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\":\"Apo\",\n\t\"location\":\"Gunduliceva 8/11 Novi Sad\",\n\t\"status\":\"Senior\",\n\t\"github\":\"DrekavacOnLine\",\n\t\"bio\":\"Born 6th of September 1970, married (three kids). Finished University of Nis, Faculty of Electronics Engineering, on February 1997. Working on various QA postitions starting August 2007.\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/profile",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Playground",
+					"item": [
+						{
+							"name": "Technologies",
+							"item": [
+								{
+									"name": "getTechnologies",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"pm.test(\"Response is an array\", () => {\r",
+													"    let jsonData = pm.response.json();\r",
+													"    pm.expect(jsonData).to.be.an('array');\r",
+													"});\r",
+													"\r",
+													"//store list of technologies\r",
+													"if (pm.response.to.have.status(200)){\r",
+													"    var responseData = JSON.parse(responseBody);\r",
+													"    var arrayLength = responseData.length;\r",
+													"    let list = [];\r",
+													"    for (var i = 0; i < arrayLength; i++) {\r",
+													"        //console.log(responseData[i].technology_id);\r",
+													"        list.push(responseData[i].technology_id);\r",
+													"    }\r",
+													"    pm.environment.set(\"existingTechnologies\",'['+list.toString()+']');        \r",
+													"}\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/technologies/all",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"technologies",
+												"all"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "postTechnology",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//technology title is correct\r",
+													"pm.test(\"Technology title is correct\", () => {\r",
+													"    let requestTechnologyTitle = JSON.parse(request.data).technology_title;\r",
+													"    let responseTechnologyTitle = JSON.parse(responseBody).technology_title;\r",
+													"    pm.expect(responseTechnologyTitle).to.eql(requestTechnologyTitle);\r",
+													"});\r",
+													"\r",
+													"// check if technology is created\r",
+													"if (pm.response.to.have.status(200)){\r",
+													"    var responseData = JSON.parse(responseBody);\r",
+													"    pm.environment.set(\"newTechnologyId\", responseData.technology_id);\r",
+													"    pm.environment.set(\"newTechnologyTitle\", responseData.technology_title);\r",
+													"    console.log(\"New technology ID: \" + pm.environment.get(\"newTechnologyId\"));\r",
+													"}\r",
+													"else {\r",
+													"    console.log(\"Failed to create technology!\");\r",
+													"}\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "64bd2d34-de56-4fe6-b3e4-b8402b21a4b0",
+												"exec": [
+													"//random script 6 characters long\r",
+													"let r = Math.random().toString(36).substr(2, 6);\r",
+													"pm.environment.set(\"randomTechnology\",JSON.stringify(\"SQL/\" + r));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"technology_title\":{{randomTechnology}}\n}"
+										},
+										"url": {
+											"raw": "{{url}}/technologies/technology",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"technologies",
+												"technology"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getTechnology",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//technology id is correct\r",
+													"pm.test(\"Technology id is correct\", () => {\r",
+													"    let requestTechnologyId = pm.environment.get(\"newTechnologyId\");\r",
+													"    let responseTechnologyId = JSON.parse(responseBody).technology_id;\r",
+													"    pm.expect(responseTechnologyId).to.eql(requestTechnologyId);\r",
+													"});\r",
+													"\r",
+													"//technology title is correct\r",
+													"pm.test(\"Technology title is correct\", () => {\r",
+													"    let requestTechnologyTitle = pm.environment.get(\"newTechnologyTitle\");\r",
+													"    let responseTechnologyTitle = JSON.parse(responseBody).technology_title;\r",
+													"    pm.expect(responseTechnologyTitle).to.eql(requestTechnologyTitle);\r",
+													"});\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/technologies/technology/{{newTechnologyId}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"technologies",
+												"technology",
+												"{{newTechnologyId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "putTechnology",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//technology title is correct\r",
+													"pm.test(\"Technology title is correct\", () => {\r",
+													"    let requestTechnologyTitle = JSON.parse(request.data).technology_title;\r",
+													"    let responseTechnologyTitle = JSON.parse(responseBody).technology_title;\r",
+													"    pm.expect(responseTechnologyTitle).to.eql(requestTechnologyTitle);\r",
+													"});\r",
+													"\r",
+													"// check if technology is updated\r",
+													"if (pm.response.to.have.status(200)){\r",
+													"    var responseData = JSON.parse(responseBody);\r",
+													"    pm.environment.set(\"newTechnologyTitle\", responseData.technology_title);\r",
+													"    console.log(\"Updated technology title: \" + pm.environment.get(\"newTechnologyTitle\"));\r",
+													"}\r",
+													"else {\r",
+													"    console.log(\"Failed to update technology!\");\r",
+													"}\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "6ab98148-86d7-4c1c-937c-4df3c04eafa7",
+												"exec": [
+													"//random script 6 characters long\r",
+													"let r = Math.random().toString(36).substr(2, 6);\r",
+													"pm.environment.set(\"randomTechnology\",JSON.stringify(\"SQL/\" + r));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"technology_title\":{{randomTechnology}}\n}"
+										},
+										"url": {
+											"raw": "{{url}}/technologies/technology/{{newTechnologyId}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"technologies",
+												"technology",
+												"{{newTechnologyId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "deleteTechnology",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//Command is executed with success\r",
+													"pm.test(\"Command is executed with success\", () => {\r",
+													"    let responseExecutionStatus = JSON.parse(responseBody).Success;\r",
+													"    pm.expect(responseExecutionStatus).to.eql(\"Entry removed successfully\");\r",
+													"});\r",
+													"\r",
+													"// check if technology is deleted\r",
+													"if (pm.response.to.have.status(200)){\r",
+													"    //console.log(\"Deleted technology ID:\" + pm.environment.get(\"newTechnologyId\"));\r",
+													"    pm.environment.set(\"deletedTechnologyId\",pm.environment.get(\"newTechnologyId\"));\r",
+													"    pm.environment.unset(\"newTechnologyId\");\r",
+													"}\r",
+													"else {\r",
+													"    console.log(\"Failed to delete technology with ID: \" + pm.environment.get(\"newTechnologyId\"));\r",
+													"}\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/technologies/technology/{{newTechnologyId}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"technologies",
+												"technology",
+												"{{newTechnologyId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Seniorities",
+							"item": [
+								{
+									"name": "getSeniorities",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"pm.test(\"Response is an array\", () => {\r",
+													"    let jsonData = pm.response.json();\r",
+													"    pm.expect(jsonData).to.be.an('array');\r",
+													"});\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/seniorities/all",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"seniorities",
+												"all"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "postSeniority",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//seniority title is correct\r",
+													"pm.test(\"Seniority title is correct\", () => {\r",
+													"    let requestSeniorityTitle = JSON.parse(request.data).seniority_title;\r",
+													"    let responseSeniorityTitle = JSON.parse(responseBody).seniority_title;\r",
+													"    pm.expect(responseSeniorityTitle).to.eql(requestSeniorityTitle);\r",
+													"});\r",
+													"\r",
+													"// check if seniority is created\r",
+													"if (pm.response.to.have.status(200)){\r",
+													"    var responseData = JSON.parse(responseBody);\r",
+													"    pm.environment.set(\"newSeniorityId\", responseData.seniority_id);\r",
+													"    pm.environment.set(\"newSeniorityTitle\", responseData.seniority_title);\r",
+													"    console.log(\"New seniority ID: \" + pm.environment.get(\"newSeniorityId\"));\r",
+													"}\r",
+													"else {\r",
+													"    console.log(\"Failed to create seniority!\");\r",
+													"}\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "931feebf-622d-43bf-a47d-ac672524f836",
+												"exec": [
+													"//random script 6 characters long\r",
+													"let r = Math.random().toString(36).substr(2, 6);\r",
+													"pm.environment.set(\"randomSeniority\",JSON.stringify(\"noob/\" + r));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"seniority_title\":{{randomSeniority}}\n}"
+										},
+										"url": {
+											"raw": "{{url}}/seniorities/seniority",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"seniorities",
+												"seniority"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getSeniority",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//seniority id is correct\r",
+													"pm.test(\"Seniority id is correct\", () => {\r",
+													"    let requestSeniorityId = pm.environment.get(\"newSeniorityId\");\r",
+													"    let responseSeniorityId = JSON.parse(responseBody).seniority_id;\r",
+													"    pm.expect(responseSeniorityId).to.eql(requestSeniorityId);\r",
+													"});\r",
+													"\r",
+													"//seniority title is correct\r",
+													"pm.test(\"Seniority title is correct\", () => {\r",
+													"    let requestSeniorityTitle = pm.environment.get(\"newSeniorityTitle\");\r",
+													"    let responseSeniorityTitle = JSON.parse(responseBody).seniority_title;\r",
+													"    pm.expect(responseSeniorityTitle).to.eql(requestSeniorityTitle);\r",
+													"});\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/seniorities/seniority/{{newSeniorityId}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"seniorities",
+												"seniority",
+												"{{newSeniorityId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "putSeniority",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//seniority title is correct\r",
+													"pm.test(\"Seniority title is correct\", () => {\r",
+													"    let requestSeniorityTitle = JSON.parse(request.data).seniority_title;\r",
+													"    let responseSeniorityTitle = JSON.parse(responseBody).seniority_title;\r",
+													"    pm.expect(responseSeniorityTitle).to.eql(requestSeniorityTitle);\r",
+													"});\r",
+													"\r",
+													"// check if seniority is updated\r",
+													"if (pm.response.to.have.status(200)){\r",
+													"    var responseData = JSON.parse(responseBody);\r",
+													"    pm.environment.set(\"newSeniorityTitle\", responseData.seniority_title);\r",
+													"    console.log(\"Updated seniority title: \" + pm.environment.get(\"newSeniorityTitle\"));\r",
+													"}\r",
+													"else {\r",
+													"    console.log(\"Failed to update seniority!\");\r",
+													"}\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "55d9c1a0-e2bc-4ee0-bd20-96c1043e53f2",
+												"exec": [
+													"//random script 6 characters long\r",
+													"let r = Math.random().toString(36).substr(2, 6);\r",
+													"pm.environment.set(\"randomSeniority\",JSON.stringify(\"noob/\" + r));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"seniority_title\":{{randomSeniority}}\n}"
+										},
+										"url": {
+											"raw": "{{url}}/seniorities/seniority/{{newSeniorityId}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"seniorities",
+												"seniority",
+												"{{newSeniorityId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "deleteSeniority",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//Command is executed with success\r",
+													"pm.test(\"Command is executed with success\", () => {\r",
+													"    let responseExecutionStatus = JSON.parse(responseBody).Success;\r",
+													"    pm.expect(responseExecutionStatus).to.eql(\"Entry removed successfully\");\r",
+													"});\r",
+													"\r",
+													"// check if seniority is deleted\r",
+													"if (pm.response.to.have.status(200)){\r",
+													"    pm.environment.set(\"deletedSeniorityId\",pm.environment.get(\"newSeniorityId\"));\r",
+													"    pm.environment.unset(\"newSeniorityId\");\r",
+													"}\r",
+													"else {\r",
+													"    console.log(\"Failed to delete seniority with ID: \" + pm.environment.get(\"newSeniorityId\"));\r",
+													"}\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/seniorities/seniority/{{newSeniorityId}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"seniorities",
+												"seniority",
+												"{{newSeniorityId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Roles",
+							"item": [
+								{
+									"name": "getRoles",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"pm.test(\"Response is an array\", () => {\r",
+													"    let jsonData = pm.response.json();\r",
+													"    pm.expect(jsonData).to.be.an('array');\r",
+													"});\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/roles/all",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"roles",
+												"all"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "postRole",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//Role name is correct\r",
+													"pm.test(\"Role name is correct\", () => {\r",
+													"    let requestRoleName = JSON.parse(request.data).role_name;\r",
+													"    let responseRoleName = JSON.parse(responseBody).role_name;\r",
+													"    pm.expect(responseRoleName).to.eql(requestRoleName);\r",
+													"});\r",
+													"\r",
+													"// check if role is created\r",
+													"if (pm.response.to.have.status(200)){\r",
+													"    var responseData = JSON.parse(responseBody);\r",
+													"    pm.environment.set(\"newRoleId\", responseData.role_id);\r",
+													"    pm.environment.set(\"newRoleName\", responseData.role_name);\r",
+													"    console.log(\"New role ID: \" + pm.environment.get(\"newRoleId\"));\r",
+													"}\r",
+													"else {\r",
+													"    console.log(\"Failed to create role!\");\r",
+													"}\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "931feebf-622d-43bf-a47d-ac672524f836",
+												"exec": [
+													"//random script 6 characters long\r",
+													"let r = Math.random().toString(36).substr(2, 6);\r",
+													"pm.environment.set(\"randomRole\",JSON.stringify(\"noob/\" + r));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"role_name\":{{randomRole}}\n}"
+										},
+										"url": {
+											"raw": "{{url}}/roles/role",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"roles",
+												"role"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getRole",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//Role id is correct\r",
+													"pm.test(\"Role id is correct\", () => {\r",
+													"    let requestRoleId = pm.environment.get(\"newRoleId\");\r",
+													"    let responseRoleId = JSON.parse(responseBody).role_id;\r",
+													"    pm.expect(responseRoleId).to.eql(requestRoleId);\r",
+													"});\r",
+													"\r",
+													"//role name is correct\r",
+													"pm.test(\"Role name is correct\", () => {\r",
+													"    let requestRoleName = pm.environment.get(\"newRoleName\");\r",
+													"    let responseRoleName = JSON.parse(responseBody).role_name;\r",
+													"    pm.expect(responseRoleName).to.eql(requestRoleName);\r",
+													"});\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/roles/role/{{newRoleId}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"roles",
+												"role",
+												"{{newRoleId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "putRole",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//Role name is correct\r",
+													"pm.test(\"Role name is correct\", () => {\r",
+													"    let requestRoleName = JSON.parse(request.data).role_name;\r",
+													"    let responseRoleName = JSON.parse(responseBody).role_name;\r",
+													"    pm.expect(responseRoleName).to.eql(requestRoleName);\r",
+													"});\r",
+													"\r",
+													"// check if role is updated\r",
+													"if (pm.response.to.have.status(200)){\r",
+													"    var responseData = JSON.parse(responseBody);\r",
+													"    pm.environment.set(\"newRoleName\", responseData.role_name);\r",
+													"    console.log(\"Updated role name: \" + pm.environment.get(\"newRoleName\"));\r",
+													"}\r",
+													"else {\r",
+													"    console.log(\"Failed to update role!\");\r",
+													"}\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "302ca981-4091-41a6-b51b-bb3b3ba542ff",
+												"exec": [
+													"//random script 6 characters long\r",
+													"let r = Math.random().toString(36).substr(2, 6);\r",
+													"pm.environment.set(\"randomRole\",JSON.stringify(\"noob/\" + r));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"role_name\":{{randomRole}}\n}"
+										},
+										"url": {
+											"raw": "{{url}}/roles/role/{{newRoleId}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"roles",
+												"role",
+												"{{newRoleId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "deleteRole",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//Command is executed with success\r",
+													"pm.test(\"Command is executed with success\", () => {\r",
+													"    let responseExecutionStatus = JSON.parse(responseBody).Success;\r",
+													"    pm.expect(responseExecutionStatus).to.eql(\"Entry removed successfully\");\r",
+													"});\r",
+													"\r",
+													"// check if role is deleted\r",
+													"if (pm.response.to.have.status(200)){\r",
+													"    pm.environment.set(\"deletedRoleId\",pm.environment.get(\"newRoleId\"));\r",
+													"    pm.environment.unset(\"newRoleId\");\r",
+													"}\r",
+													"else {\r",
+													"    console.log(\"Failed to delete seniority with ID: \" + pm.environment.get(\"newSeniorityId\"));\r",
+													"}\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/roles/role/{{newRoleId}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"roles",
+												"role",
+												"{{newRoleId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "People",
+							"item": [
+								{
+									"name": "getPeople",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"pm.test(\"Response is an array\", () => {\r",
+													"    let jsonData = pm.response.json();\r",
+													"    pm.expect(jsonData).to.be.an('array');\r",
+													"});\r",
+													"\r",
+													"//store list of persons\r",
+													"if (pm.response.to.have.status(200)){\r",
+													"    var responseData = JSON.parse(responseBody);\r",
+													"    var arrayLength = responseData.length;\r",
+													"    let list = [];\r",
+													"    for (var i = 0; i < arrayLength; i++) {\r",
+													"        list.push(responseData[i].people_id);\r",
+													"    }\r",
+													"    list.sort();\r",
+													"    pm.environment.set(\"existingPeople\",'['+list.toString()+']');        \r",
+													"}\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/people/all",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"people",
+												"all"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "postPerson",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//Person name is correct\r",
+													"pm.test(\"Name of person is correct\", () => {\r",
+													"    let requestPersonName = JSON.parse(request.data).people_name;\r",
+													"    let responsePersonName = JSON.parse(responseBody).people_name;\r",
+													"    pm.expect(responsePersonName).to.eql(requestPersonName);\r",
+													"});\r",
+													"\r",
+													"//seniority is correct\r",
+													"pm.test(\"Seniority of person is correct\", () => {\r",
+													"    let requestSeniorityId = JSON.parse(request.data).seniority_id;\r",
+													"    let responseSeniorityId = JSON.parse(responseBody).seniority.seniority_id;\r",
+													"    pm.expect(responseSeniorityId).to.eql(requestSeniorityId);\r",
+													"});\r",
+													"\r",
+													"//role is correct\r",
+													"pm.test(\"Role of person is correct\", () => {\r",
+													"    let requestRoleId = JSON.parse(request.data).role_id;\r",
+													"    let responseRoleId = JSON.parse(responseBody).role.role_id;\r",
+													"    pm.expect(responseRoleId).to.eql(requestRoleId);\r",
+													"});\r",
+													"\r",
+													"//all technologies are present\r",
+													"pm.test(\"All technologies are present\", () => {\r",
+													"    let requestTechnologies = pm.environment.get(\"existingTechnologies\");\r",
+													"    var responseData = JSON.parse(responseBody);\r",
+													"    var arrayLength = responseData.technologies.length;\r",
+													"    let list = [];\r",
+													"    for (var i = 0; i < arrayLength; i++) {\r",
+													"        list.push(responseData.technologies[i].technology_id);\r",
+													"    }\r",
+													"    let responseTechnologies = '['+list.toString()+']';\r",
+													"    pm.expect(responseTechnologies).to.eql(requestTechnologies);\r",
+													"});\r",
+													"\r",
+													"if (pm.response.to.have.status(200)){\r",
+													"    var responseData = JSON.parse(responseBody);\r",
+													"    pm.environment.set(\"newPersonId\", responseData.people_id);\r",
+													"    console.log(\"New person's ID: \" + pm.environment.get(\"newPersonId\"));\r",
+													"}\r",
+													"else {\r",
+													"    console.log(\"Failed to create person!\");\r",
+													"}\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "d957929f-f8fa-480b-8454-2f40560bf6b0",
+												"exec": [
+													"//random script 6 characters long\r",
+													"let r = Math.random().toString(36).substr(2, 6);\r",
+													"pm.environment.set(\"randomPersonName\",JSON.stringify(\"Pera Peric \" + r));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"people_name\": {{randomPersonName}},\r\n    \"seniority_id\": {{newSeniorityId}},\r\n    \"technologies\": {{existingTechnologies}},\r\n    \"role_id\": {{newRoleId}}\r\n}"
+										},
+										"url": {
+											"raw": "{{url}}/people/person",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"people",
+												"person"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "deletePerson",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//Command is executed with success\r",
+													"pm.test(\"Command is executed with success\", () => {\r",
+													"    let responseExecutionStatus = JSON.parse(responseBody).Success;\r",
+													"    pm.expect(responseExecutionStatus).to.eql(\"Entry removed successfully\");\r",
+													"});\r",
+													"\r",
+													"// check if person is deleted\r",
+													"if (pm.response.to.have.status(200)){\r",
+													"    pm.environment.set(\"deletedPersonId\",pm.environment.get(\"newPersonId\"));\r",
+													"    pm.environment.unset(\"newPersonId\");\r",
+													"}\r",
+													"else {\r",
+													"    console.log(\"Failed to delete person with ID: \" + pm.environment.get(\"newPersonId\"));\r",
+													"}\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/people/person/{{newPersonId}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"people",
+												"person",
+												"{{newPersonId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Projects",
+							"item": [
+								{
+									"name": "getProjects",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"pm.test(\"Response is an array\", () => {\r",
+													"    let jsonData = pm.response.json();\r",
+													"    pm.expect(jsonData).to.be.an('array');\r",
+													"});\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/projects/all",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"projects",
+												"all"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "postProject",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//Title of project is correct\r",
+													"pm.test(\"Title of project is correct\", () => {\r",
+													"    let requestProjectTitle = JSON.parse(request.data).project_title;\r",
+													"    let responseProjectTitle = JSON.parse(responseBody).project_title;\r",
+													"    pm.expect(responseProjectTitle).to.eql(requestProjectTitle);\r",
+													"});\r",
+													"\r",
+													"//all persons are included\r",
+													"pm.test(\"All persons are included\", () => {\r",
+													"    let requestPeople = pm.environment.get(\"existingPeople\");\r",
+													"    var responseData = JSON.parse(responseBody);\r",
+													"    var arrayRoleLength = responseData.roles.length;\r",
+													"    let list = [];\r",
+													"    for (var j = 0; j < arrayRoleLength; j++) {\r",
+													"        var arrayPeopleLength = responseData.roles[j].people.length;\r",
+													"        for (var i = 0; i < arrayPeopleLength; i++) {\r",
+													"            list.push(responseData.roles[j].people[i].people_id);\r",
+													"        }\r",
+													"    }\r",
+													"    list.sort();\r",
+													"    let responsePeople = '['+list.toString()+']';\r",
+													"    pm.expect(responsePeople).to.eql(requestPeople);\r",
+													"});\r",
+													"\r",
+													"\r",
+													"if (pm.response.to.have.status(200)){\r",
+													"    var responseData = JSON.parse(responseBody);\r",
+													"    pm.environment.set(\"newProjectId\", responseData.project_id);\r",
+													"    console.log(\"New projects's ID: \" + pm.environment.get(\"newProjectId\"));\r",
+													"}\r",
+													"else {\r",
+													"    console.log(\"Failed to create project!\");\r",
+													"}\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "d957929f-f8fa-480b-8454-2f40560bf6b0",
+												"exec": [
+													"//random script 6 characters long\r",
+													"let r = Math.random().toString(36).substr(2, 6);\r",
+													"pm.environment.set(\"randomProjectTitle\",JSON.stringify(\"Project - \" + r));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"project_title\":{{randomProjectTitle}},\n\t\"people\":{{existingPeople}}\n}"
+										},
+										"url": {
+											"raw": "{{url}}/projects/project",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"projects",
+												"project"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "deleteProject",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a30f655e-7770-40a3-b102-dfb536dfa910",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//Command is executed with success\r",
+													"pm.test(\"Command is executed with success\", () => {\r",
+													"    let responseExecutionStatus = JSON.parse(responseBody).Success;\r",
+													"    pm.expect(responseExecutionStatus).to.eql(\"Entry removed successfully\");\r",
+													"});\r",
+													"\r",
+													"// check if project is deleted\r",
+													"if (pm.response.to.have.status(200)){\r",
+													"    pm.environment.set(\"deletedProjectId\",pm.environment.get(\"newProjectId\"));\r",
+													"    pm.environment.unset(\"newProjectId\");\r",
+													"}\r",
+													"else {\r",
+													"    console.log(\"Failed to delete project with ID: \" + pm.environment.get(\"newProjectId\"));\r",
+													"}\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/projects/project/{{newProjectId}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"projects",
+												"project",
+												"{{newProjectId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Tools",
+			"item": [
+				{
+					"name": "getAuthToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9a273110-311c-4228-915e-cd6995d15219",
+								"exec": [
+									"pm.test(\"Fetch a valid test token from the test-token REST service\", function () {",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.environment.set(\"access_token\", JSON.parse(responseBody).token);",
+									"});",
+									"",
+									"",
+									"// Session navigate from PrS using eval()",
+									"eval(globals.sessionNavigate)();",
+									"",
+									"// Reset reference to TR test cases",
+									"pm.globals.unset(\"_tr_\" + request.name);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6ee2d0e8-1a92-4a19-80b1-45d1262d6230",
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":{{email}},\n\t\"password\":{{password}}\n}"
+						},
+						"url": {
+							"raw": "{{url}}/users/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						},
+						"description": "Retrieve the test token"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "cc52a1da-bedb-499b-9889-bd5c4a2f665c",
+				"type": "text/javascript",
+				"exec": [
+					"//************************************************************************************************",
+					"// variable initialization************************************************************************",
+					"//************************************************************************************************",
+					"",
+					"// Define test data, setup configuration per environment",
+					"//let pmEnv = pm.environment.get(\"envName\");",
+					"let pmEnv = pm.environment.name;",
+					"let dataEnv = data.envName;",
+					"if (dataEnv){",
+					"    if (pmEnv !== dataEnv) {",
+					"        throw new Error(\"Wrong environment selected, testing is terminated!\");",
+					"    }",
+					"}",
+					"",
+					"// Save common tests in a global variable",
+					"postman.setGlobalVariable(\"commonTests\", () => {",
+					"    pm.test(\"Response must be valid with/with out a body and with proper status code\", function () {",
+					"        if ([\"GET\",\"POST\",\"PUT\",\"DELETE\"].indexOf(request.method) > -1) {",
+					"            pm.response.to.not.be.error;",
+					"            pm.response.to.be.withBody;",
+					"            pm.response.to.be.json;",
+					"            pm.response.to.have.jsonBody();",
+					"            pm.response.to.not.have.jsonBody('error');",
+					"            pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8');",
+					"        } else {",
+					"            pm.response.to.not.be.withBody;",
+					"        }",
+					"        switch(request.method){",
+					"            case \"POST\":",
+					"                pm.response.to.have.status(200);",
+					"                break;",
+					"            case \"PUT\":",
+					"                pm.response.to.have.status(200);",
+					"                break;",
+					"            case \"GET\":",
+					"                pm.response.to.have.status(200);",
+					"                break;",
+					"            case \"DELETE\":",
+					"                pm.response.to.have.status(200);",
+					"                break;",
+					"        }        ",
+					"    });",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"sessionInit\", (testSession, sessionName) => {",
+					"    //session init section",
+					"    console.log(request.name + \", initialization: \" + testSession + \", global var: \" + sessionName);",
+					"    console.log(request.name + \", executing: \" + testSession[0]);",
+					"    ",
+					"    // Select first test from session to be executed",
+					"    postman.setNextRequest(testSession[0]);",
+					"    testSession.shift();",
+					"    if (testSession.length === 0) {",
+					"        console.log(request.name + \", test session is empty, unset \" + sessionName);",
+					"        pm.globals.unset(sessionName);",
+					"        console.log(request.name + \", terminate tests execution list\");",
+					"    } else {",
+					"        pm.globals.set(sessionName, testSession);",
+					"        console.log(request.name + \" for \" + sessionName + \", updated list of tests to be executed: \" + testSession);",
+					"    }",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"sessionNavigate\", () => {",
+					"    console.log(request.name + \", entering ...\");",
+					"    if (pm.globals.get(\"requestsToRun\") === undefined){",
+					"        console.log(request.name + \", requestsToRun is undefined\");",
+					"        pm.globals.set(\"testRailTestCases\",\"\");",
+					"        console.log(request.name + \", reset global var: testRailTestCases\");    ",
+					"        if (pm.globals.get(\"testSession\") === undefined){",
+					"            console.log(request.name + \", testSession is undefined\");",
+					"            console.log(\"The end\");",
+					"            postman.setNextRequest(null);",
+					"        } else {",
+					"        var testSession = pm.globals.get(\"testSession\");",
+					"        console.log(request.name + \", checking what to run: \" + testSession[0]);",
+					"        postman.setNextRequest(testSession[0]); ",
+					"        testSession.shift();",
+					"        if (testSession.length === 0) {",
+					"            pm.globals.unset(\"testSession\");",
+					"            console.log(request.name + \", terminate execution list\");",
+					"        } else {",
+					"            pm.globals.set(\"testSession\", testSession);",
+					"            console.log(request.name + \", updated list of tests to be executed: \" + testSession);",
+					"        }}",
+					"    } else {",
+					"    var requestsToRun = pm.globals.get(\"requestsToRun\");",
+					"    console.log(request.name + \", checking what to run: \" + requestsToRun[0]);",
+					"    postman.setNextRequest(requestsToRun[0]); ",
+					"    requestsToRun.shift();",
+					"    if (requestsToRun.length === 0) {",
+					"        pm.globals.unset(\"requestsToRun\");",
+					"        console.log(request.name + \", terminate requests execution list\");",
+					"    } else {",
+					"        pm.globals.set(\"requestsToRun\", requestsToRun);",
+					"        console.log(request.name + \", updated list of requests to be executed: \" + requestsToRun);",
+					"    }}",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"cleanup\", () => {",
+					"    const clean = [\"requestsToRun\", \"testSession\"];",
+					"    for(let i = 0; i < clean.length; ++i){",
+					"        pm.globals.unset(clean[i]);",
+					"    }",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"schemaValidator\", (schema, jsonData) => {",
+					"",
+					"    //new schema validation implementation",
+					"    var schemaValidationPassed = true;",
+					"    var serviceSchema = pm.environment.get(schema);",
+					"    //var jsonData = JSON.parse(pm.responseBody);",
+					"",
+					"    var validationResult = tv4.validateMultiple(jsonData, serviceSchema, true, true);",
+					"    for(var i =0; i<validationResult.errors.length;i++){",
+					"        console.log(\"path :\"+ validationResult.errors[i].dataPath +\" message :\"+ validationResult.errors[i].message);  ",
+					"        //Skipping all \"Invalid type\" errors as they are expected with current service implementations",
+					"        schemaValidationPassed = schemaValidationPassed && (validationResult.errors[i].message.lastIndexOf(\"Invalid type\") > -1);",
+					"        //console.log(\"schemaValidationPassed :\" + schemaValidationPassed);",
+					"    }    ",
+					"    return schemaValidationPassed;",
+					"}); ",
+					"",
+					"postman.setGlobalVariable(\"isTest\", () => {",
+					"    let reqPurpose = pm.globals.get(\"_tr_\" + request.name);",
+					"    //console.log(request.name + \" has purpose: \" + reqPurpose);",
+					"    if ([\"[cleanUp]\",\"[preCondition]\",\"[postCondition]\"].indexOf(reqPurpose) > -1) {",
+					"        //console.log(\"Conclusion: NOT a test\");",
+					"        return false;",
+					"    } else {",
+					"        //console.log(\"Conclusion: IS a test\");",
+					"        return true;",
+					"    }",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "7e7d41ba-50b0-48b0-bc52-53d4e572706a",
+				"type": "text/javascript",
+				"exec": [
+					"// check if test is executed",
+					"//pm.test(\"'\" + request.name +\"' is initiated\", function () {",
+					"    //pm.response.to.have.status(200);",
+					"    //pm.response.to.be.success ",
+					"//});"
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

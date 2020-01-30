@@ -1,0 +1,13 @@
+{
+  "name": "sandbox",
+  "version": "1.0.0",
+  "description": "Project for running API automated tests",
+  "scripts": {
+    "api-test-automation-core": "newman run MODULE-Sandbox.postman_collection.json -e Sandbox.postman_environment.json -d MODULE-Sandbox.Core.json --reporters cli,html,htmlextra --reporter-html-export report/index_core.html --reporter-htmlextra-logs --reporter-htmlextra-export report/Postman_API_Tests.html --reporter-htmlextra-title 'Sandbox module, Core tests' --reporter-htmlextra-titleSize 6 --reporter-htmlextra-darkTheme",
+  },
+  "author": "APOSTOL",
+  "dependencies": {
+    "newman": "^4.5.4",
+    "newman-reporter-html": "^1.0.3"
+  }
+}
